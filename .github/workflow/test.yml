@@ -1,0 +1,50 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+    - '**'
+
+jobs:
+
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Install Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9.12
+          architecture: x64
+        
+      - name: Install dependencies
+        run: pip3 install pytest pytest-cov
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+          - name: Running tests
+      id: tests
+      run: |
+        echo "::set-output name=LAST_ENTRY::$(pytest tests/ --cache-clear --cov=analytics | tail -1)"
+
+    # count coverage
+    - name: Running tests coverage
+      if: always()
+      id: coverage
+      run: |
+        echo 'test_coverage<<EOF' >> $GITHUB_ENV
+        echo "$(coverage report --fail-under=80 | tail -1)" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV 
+    # Report
+    - name: Report test results
+      if: always()
+      uses: actions/github-script@v4
+      with:
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: 'Test case: ${{ steps.tests.outputs.LAST_ENTRY }}\nTest coverage: ${{ env.test_coverage }}'
+          })
