@@ -1,0 +1,9 @@
+class {{ x.header.identifier }}DqlQuery:
+    def __init__(self, **kwargs):
+        self.kwargs = None
+        self.raw_str =  """{{ x.raw_string }}"""
+        self.f_str = """{{ x.f_formatted_string }}"""
+        self.replacement_vars = {{ x.replacement_vars }}
+
+    def query(self):
+        return self.raw_str.format(**self.kwargs)

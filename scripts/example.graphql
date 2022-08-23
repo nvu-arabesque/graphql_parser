@@ -1,0 +1,8 @@
+type User @dgraph(type: "User") {
+  displayName: String
+  email: String
+  emailVerified: Boolean
+  photoURL: String
+  roles: [String!]
+  userId: String! @id
+}

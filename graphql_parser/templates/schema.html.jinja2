@@ -1,0 +1,12 @@
+class {{ x.identifier }}(BaseModel):
+    {% for property in x.properties %}
+    {{- property.key }}: {{ format(property.value) }}
+    {% endfor -%}
+    {% if x.directives is none -%}
+    _directives: Optional[Dict]=None
+    {% else -%}
+    _directives: Optional[Dict]={
+        {% for directive in x.directives %}
+        "{{- directive.type }}": {{ directive.params }}
+        {% endfor -%}}
+    {% endif -%}

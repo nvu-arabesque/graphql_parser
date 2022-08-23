@@ -1,0 +1,20 @@
+class {{ x.query.header.identifier }}DqlUpsert:
+    def __init__(self, **kwargs):
+        self.kwargs = None
+        self.replacement_vars = {{ x.replacement_vars }}
+        self.query: str = """{{ func(x.query.string)[1] }}"""
+        self.mutations: Dict = [
+        {% for mutation in x.mutations -%}
+            {
+                "type": "{{ mutation.function }}",
+                "rdfs": [
+                    {% for rdf in mutation.rdfs -%}
+                    "{{ rdf.string }}",
+                    {% endfor -%}
+                ]
+            },
+        {% endfor -%}
+        ]
+
+    def query(self):
+        return self.raw_str.format(**self.kwargs)

@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "graphql_parser"
+version = "0.1"
+description = "An api for universe construction based on a set of rules refered to as filters."
+authors = ["nvu"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "3.9.12"
+pyparsing = "2.4.7"
+httplib2 = "0.19.0"
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.3.0"
+flake8 = "^4.0.1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
