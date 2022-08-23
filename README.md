@@ -1,4 +1,4 @@
-This library provides simple lexer and parser for using with `dgraph` including graphql and dql. The goal is to auto-generate pydantic schema given definitions provided by graphql and dql. The motivation is inspired by `https://www.graphql-code-generator.com/`, in which we work with `graphql` definitions and use it as a ground truth for our schemas, using which `pydantic` classes can then be generated and used for other processes.
+This library provides simple parser for using with `dgraph` including graphql and dql (graphql+-). The goal is to auto-generate pydantic schema given definitions provided by graphql and dql. The motivation is inspired by `https://www.graphql-code-generator.com/`, in which we work with `graphql` definitions and use it as a ground truth for our schemas, using which `pydantic` classes can then be generated and used for other processes.
 
 The content is inspired by the work in https://github.com/lsmag/graphql-python/blob/master/graphql/grammar.py, please refer to the aforementioned repo for explaination regarding how this works.
 
