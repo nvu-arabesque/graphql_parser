@@ -26,7 +26,7 @@ jobs:
     - name: Running tests
       id: tests
       run: |
-        echo "::set-output name=LAST_ENTRY::$(pytest tests/ --cache-clear --cov=analytics | tail -1)"
+        echo "::set-output name=LAST_ENTRY::$(pytest tests/ --cache-clear --cov=graphql_parser | tail -1)"
 
     # count coverage
     - name: Running tests coverage
