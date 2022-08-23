@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "graphql_parser"
 version = "0.1"
-description = "An api for universe construction based on a set of rules refered to as filters."
+description = "A GraphQL (+-) parser used to generate pydantic schema from graphql and dql"
 authors = ["nvu"]
 license = "MIT License"
 
