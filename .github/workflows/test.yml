@@ -6,27 +6,27 @@ on:
     - '**'
 
 jobs:
+  coverage:
+    name: python-code-coverage
+    runs-on: ubuntu-20.04
 
-  pytest:
-    runs-on: ubuntu-latest
     steps:
-
-      - name: Install Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.9.12
-          architecture: x64
-        
-      - name: Install dependencies
-        run: pip3 install pytest pytest-cov
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-          - name: Running tests
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9.12
+    # install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest pytest-cov coverage
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # Running tests
+    - name: Running tests
       id: tests
       run: |
-        echo "::set-output name=LAST_ENTRY::$(pytest tests/ --cache-clear --cov=analytics | tail -1)"
+        echo "::set-output name=LAST_ENTRY::$(pytest tests/ --cache-clear --cov=graphql_parser | tail -1)"
 
     # count coverage
     - name: Running tests coverage
